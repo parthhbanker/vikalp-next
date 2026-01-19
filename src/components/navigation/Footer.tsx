@@ -3,7 +3,7 @@
 import { memo, useState } from 'react';
 import Link from 'next/link';
 import { Logo } from './Logo';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Heart, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Youtube, Heart, Send } from 'lucide-react';
 import { trackButtonClick, trackFormSubmit } from '@/lib/analytics';
 import { Button, Input } from '@/components/ui';
 
@@ -52,6 +52,7 @@ function FooterComponent() {
     { name: 'Twitter', icon: Twitter, href: '#' },
     { name: 'LinkedIn', icon: Linkedin, href: '#' },
     { name: 'Instagram', icon: Instagram, href: '#' },
+    { name: 'YouTube', icon: Youtube, href: '#' },
   ];
 
   return (
@@ -60,11 +61,16 @@ function FooterComponent() {
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+            {/* Left Side - Heading */}
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">Stay Connected with Nature</h3>
+              <p className="text-gray-300">Get updates on our environmental initiatives</p>
+            </div>
 
             {/* Newsletter */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10">
-              <h3 className="text-lg font-bold mb-1">Stay Updated</h3>
-              <p className="text-gray-300 text-sm mb-3">Subscribe to our newsletter for impact stories and updates.</p>
+              <h3 className="text-lg font-bold mb-1">Subscribe to Newsletter</h3>
+              <p className="text-gray-300 text-sm mb-3">Receive impact stories and updates directly to your inbox.</p>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <input
                   type="email"

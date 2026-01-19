@@ -172,7 +172,7 @@ function ProgramsSectionComponent() {
         {/* Cards Slider */}
         <div
           ref={scrollContainerRef}
-          className={`flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 transition-all duration-700 delay-200 ${
+          className={`flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth p-8 -m-8 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100' : 'opacity-0'
           }`}
           style={{

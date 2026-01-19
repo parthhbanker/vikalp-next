@@ -14,14 +14,16 @@ function SDGSectionComponent() {
   
   // Relevant SDG goals for VIKALP's work
   const sdgGoals = [
-    { number: 1, title: 'No Poverty', color: '#E5243B' },
-    { number: 2, title: 'Zero Hunger', color: '#DDA63A' },
-    { number: 5, title: 'Gender Equality', color: '#FF3A21' },
-    { number: 8, title: 'Decent Work and Economic Growth', color: '#A21942' },
-    { number: 10, title: 'Reduced Inequalities', color: '#DD1367' },
-    { number: 13, title: 'Climate Action', color: '#3F7E44' },
-    { number: 15, title: 'Life on Land', color: '#56C02B' },
-    { number: 17, title: 'Partnerships for the Goals', color: '#19486A' },
+    { number: 1, title: 'No Poverty', image: '/images/sdg/sdg-1.png' },
+    { number: 2, title: 'Zero Hunger', image: '/images/sdg/sdg-2.png' },
+    { number: 3, title: 'Good Health and Well-being', image: '/images/sdg/sdg-3.png' },
+    { number: 5, title: 'Gender Equality', image: '/images/sdg/sdg-5.png' },
+    { number: 8, title: 'Decent Work and Economic Growth', image: '/images/sdg/sdg-8.png' },
+    { number: 10, title: 'Reduced Inequalities', image: '/images/sdg/sdg-10.png' },
+    { number: 12, title: 'Responsible Consumption and Production', image: '/images/sdg/sdg-12.png' },
+    { number: 13, title: 'Climate Action', image: '/images/sdg/sdg-13.png' },
+    { number: 15, title: 'Life on Land', image: '/images/sdg/sdg-15.png' },
+    { number: 17, title: 'Partnerships for the Goals', image: '/images/sdg/sdg-17.png' },
   ];
 
   return (
@@ -44,7 +46,7 @@ function SDGSectionComponent() {
         </div>
 
         {/* SDG Goals Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6">
+        <div className="grid grid-cols-5 lg:grid-cols-10 gap-4 md:gap-6 max-w-6xl mx-auto">
           {sdgGoals.map((goal, index) => (
             <div
               key={goal.number}
@@ -52,27 +54,18 @@ function SDGSectionComponent() {
                 isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
               }`}
               style={{ 
-                backgroundColor: goal.color,
                 transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
               }}
               role="img"
               aria-label={`UN Sustainable Development Goal ${goal.number}: ${goal.title}`}
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-white">
-                <div className="text-2xl md:text-3xl font-bold mb-1" aria-hidden="true">
-                  {goal.number}
-                </div>
-                <div className="text-xs md:text-sm font-medium text-center leading-tight">
-                  {goal.title}
-                </div>
-              </div>
-
-              {/* Hover overlay with more info */}
-              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
-                <p className="text-white text-xs text-center leading-relaxed">
-                  Goal {goal.number}: {goal.title}
-                </p>
-              </div>
+              <Image
+                src={goal.image}
+                alt={`SDG ${goal.number}: ${goal.title}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 12.5vw"
+              />
             </div>
           ))}
         </div>

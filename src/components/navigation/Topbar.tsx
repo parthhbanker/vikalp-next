@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useCallback } from 'react';
-import { Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Mail, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { trackButtonClick } from '@/lib/analytics';
 
 /**
@@ -21,6 +21,7 @@ function TopbarComponent() {
     { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/vikalp', ariaLabel: 'Visit our Twitter profile' },
     { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/vikalp', ariaLabel: 'Visit our Instagram page' },
     { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/company/vikalp', ariaLabel: 'Visit our LinkedIn page' },
+    { name: 'YouTube', icon: Youtube, url: 'https://youtube.com/@vikalp', ariaLabel: 'Visit our YouTube channel' },
   ];
 
   const handleSocialClick = useCallback((name: string, url: string) => {

@@ -38,19 +38,19 @@ function HeroSectionComponent() {
   const stats = [
     {
       icon: <TreeDeciduous size={32} strokeWidth={2} />,
-      value: 500,
-      suffix: 'K+',
+      value: 422924,
+      suffix: '+',
       label: 'Trees Planted',
     },
     {
       icon: <Users size={32} strokeWidth={2} />,
-      value: 10,
-      suffix: 'K+',
+      value: 5000,
+      suffix: '+',
       label: 'Women Farmers',
     },
     {
       icon: <MapPin size={32} strokeWidth={2} />,
-      value: 200,
+      value: 150,
       suffix: '+',
       label: 'Villages Impacted',
     },
@@ -70,8 +70,8 @@ function HeroSectionComponent() {
         {/* Hero Content */}
         <div className="text-center max-w-4xl mx-auto mb-12 md:mb-16">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-fade-in-up">
-            Creating Sustainable Futures{' '}
-            <span className="text-brand">Together</span>
+            Let's Grow<br />
+            the Future <span className="text-brand">Together</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-muted mb-8 leading-relaxed max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
             Empowering indigenous and deprived communities in Gujarat through climate action,

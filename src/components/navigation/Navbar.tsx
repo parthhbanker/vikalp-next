@@ -95,7 +95,7 @@ function NavbarComponent() {
               <Logo size="xl" className="hidden lg:block" />
               <div className="flex flex-col">
                 <span className="text-xl lg:text-2xl font-bold text-foreground group-hover:text-brand transition-colors duration-200">VIKALP</span>
-                <span className="text-xs text-muted group-hover:text-brand transition-colors duration-200">Since 2002</span>
+                <span className="text-xs text-muted group-hover:text-brand transition-colors duration-200">Growing the Future Together</span>
               </div>
             </Link>
           </div>
