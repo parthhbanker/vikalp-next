@@ -30,6 +30,7 @@ function FooterComponent() {
     { name: 'Our Team', href: '/team' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Publications', href: '/publications' },
+    { name: 'Legal Documents', href: '/legal' },
     { name: 'Contact', href: '/contact' },
   ];
 
