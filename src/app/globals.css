@@ -1,26 +1,245 @@
 @import "tailwindcss";
 
+/*
+  Vikalp Brand Color Palette
+  Primary: Plant Green (from logo gradient) - hsl(92, 96%, 31%)
+  Theme: Minimal off-white with nature-inspired accents
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background & Surface Colors - Minimal Off-White Theme */
+  --background: 250 250 248; /* Warm off-white */
+  --surface: 255 255 255; /* Pure white for cards/containers */
+  --surface-secondary: 246 246 244; /* Subtle gray for sections */
+
+  /* Text Colors */
+  --foreground: 23 23 23; /* Near black for primary text */
+  --foreground-muted: 82 82 82; /* Muted text */
+  --foreground-subtle: 115 115 115; /* Subtle text */
+
+  /* Brand Colors - Plant Green from Logo */
+  --brand-primary: 92 96% 31%; /* Main brand green HSL */
+  --brand-primary-rgb: 97 156 3; /* RGB equivalent for opacity usage */
+  --brand-light: 92 90% 45%; /* Lighter variant for hovers */
+  --brand-dark: 92 96% 25%; /* Darker variant for pressed states */
+
+  /* Accent Colors - Agriculture Theme */
+  --accent-earth: 30 45% 45%; /* Earthy brown for soil/earth elements */
+  --accent-sky: 205 80% 60%; /* Sky blue for water/sky elements */
+  --accent-sun: 45 95% 55%; /* Golden yellow for sun/harvest */
+  --accent-leaf: 140 60% 40%; /* Secondary green for variety */
+
+  /* Semantic Colors */
+  --success: 142 70% 45%; /* Success green */
+  --warning: 38 92% 50%; /* Warning amber */
+  --error: 0 70% 50%; /* Error red */
+  --info: 205 80% 55%; /* Info blue */
+
+  /* Borders & Dividers */
+  --border: 219 219 219; /* Subtle borders - true neutral gray RGB */
+  --border-strong: 179 179 179; /* Stronger borders RGB */
+  
+
+  /* Interactive States */
+  --hover-overlay: 0 0% 0% / 0.05; /* Subtle hover overlay */
+  --active-overlay: 0 0% 0% / 0.1; /* Active/pressed overlay */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
+/* Tailwind v4 Theme Configuration */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Typography */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Background & Foreground */
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-surface-secondary: rgb(var(--surface-secondary));
+  --color-foreground: rgb(var(--foreground));
+  --color-foreground-muted: rgb(var(--foreground-muted));
+  --color-foreground-subtle: rgb(var(--foreground-subtle));
+
+  /* Brand Colors */
+  --color-brand: hsl(var(--brand-primary));
+  --color-brand-light: hsl(var(--brand-light));
+  --color-brand-dark: hsl(var(--brand-dark));
+
+  /* Accent Colors */
+  --color-earth: hsl(var(--accent-earth));
+  --color-sky: hsl(var(--accent-sky));
+  --color-sun: hsl(var(--accent-sun));
+  --color-leaf: hsl(var(--accent-leaf));
+
+  /* Semantic Colors */
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-error: hsl(var(--error));
+  --color-info: hsl(var(--info));
+
+  /* Borders */
+  --color-border: rgb(var(--border));
+  --color-border-strong: rgb(var(--border-strong));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base Styles */
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+
+  /* Better font rendering across all platforms */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* Touch-friendly tap highlight removal */
+  -webkit-tap-highlight-color: transparent;
+
+  /* Prevent text size adjustment on orientation change (iOS) */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Improved touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"],
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Smooth scrolling with reduced motion support */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Focus visible styles for accessibility */
+button:focus-visible {
+  outline: 2px solid hsl(var(--brand-primary));
+  outline-offset: 2px;
+}
+
+/* Remove focus outline from inputs */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Selection color using brand */
+::selection {
+  background-color: hsla(var(--brand-primary) / 0.2);
+  color: var(--color-foreground);
+}
+
+::-moz-selection {
+  background-color: hsla(var(--brand-primary) / 0.2);
+  color: var(--color-foreground);
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+/* Animation Delays */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-800 {
+  animation-delay: 800ms;
 }
