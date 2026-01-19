@@ -366,19 +366,19 @@ function TeamSection() {
       name: 'Himanshu Banker',
       role: 'Managing Director',
       description: 'Managing Director of VIKALP, overseeing all organizational operations and strategic initiatives.',
-      image: '/team/himanshu-banker.jpg',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop',
     },
     {
       name: 'Mahesh Pandya',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: '/team/mahesh-pandya.jpg',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
     },
     {
       name: 'Lila Chaudhari',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: '/team/lila-chaudhari.jpg',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
     },
   ];
 

@@ -84,7 +84,7 @@ function ProgramsSectionComponent() {
 
   const programs: ProgramCardProps[] = [
     {
-      image: '/programs/bhoomi-collective.jpg',
+      image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop',
       tag: 'Community Empowerment',
       title: "Bhoomi Producers' Collective",
       description:
@@ -92,7 +92,7 @@ function ProgramsSectionComponent() {
       href: '/programs#bhoomi-collective',
     },
     {
-      image: '/programs/regenerative-agriculture.jpg',
+      image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop',
       tag: 'Sustainable Agriculture',
       title: 'Regenerative Sustainable Agriculture',
       description:
@@ -100,7 +100,7 @@ function ProgramsSectionComponent() {
       href: '/programs#regenerative-agriculture',
     },
     {
-      image: '/programs/trees-biodiversity.jpg',
+      image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop',
       tag: 'Biodiversity Conservation',
       title: 'TREES & Biodiversity Sites',
       description:
