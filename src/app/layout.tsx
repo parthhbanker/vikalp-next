@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { GTMScript, GTMNoScript } from "@/components/analytics/GTMScript";
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
@@ -34,7 +35,9 @@ export default function RootLayout({
         </a>
 
         <GTMNoScript />
-        <GTMScript />
+        <Suspense fallback={null}>
+          <GTMScript />
+        </Suspense>
         <ScrollDepthTracker />
         <OutboundLinkTracker />
         <Topbar />
