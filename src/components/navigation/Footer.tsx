@@ -44,8 +44,8 @@ function FooterComponent() {
   const support = [
     { name: 'Donate Now', href: '/donate' },
     { name: 'Volunteer', href: '/volunteer' },
-    { name: 'Partner With Us', href: '/partnership' },
-    { name: 'Corporate Giving', href: '/corporate' },
+    { name: 'Partner With Us', href: '/partner' },
+    { name: 'Corporate Giving', href: '/corporate-giving' },
   ];
 
   const socialLinks = [
