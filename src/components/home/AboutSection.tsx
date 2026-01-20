@@ -17,7 +17,7 @@ function AboutSectionComponent() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
           <div className={`order-2 lg:order-1 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-sm font-semibold mb-6">
               About VIKALP
@@ -55,7 +55,7 @@ function AboutSectionComponent() {
 
           {/* Image */}
           <div className={`order-1 lg:order-2 transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
             <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
               <Image

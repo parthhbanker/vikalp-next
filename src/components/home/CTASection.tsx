@@ -26,9 +26,9 @@ function ActionCard({
   variant = 'outline',
 }: ActionCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-border hover:border-brand/30">
+    <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-2xl transition-all duration-300 border border-border hover:border-brand/30">
       <div className="flex flex-col items-center text-center">
-        <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center mb-4 text-brand">
+        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand/10 flex items-center justify-center mb-4 text-brand [&>svg]:w-6 [&>svg]:h-6 sm:[&>svg]:w-8 sm:[&>svg]:h-8">
           {icon}
         </div>
         <h3 className="text-2xl font-bold text-foreground mb-3">{title}</h3>

@@ -66,11 +66,11 @@ function MissionVisionSection() {
     <section className="py-16 md:py-24 bg-gradient-to-b from-surface-secondary to-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          <div className={`bg-white p-8 rounded-2xl shadow-lg transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          <div className={`bg-white p-6 sm:p-8 rounded-2xl shadow-lg transition-all duration-700 ${
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
-            <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mb-6">
-              <Target className="w-8 h-8 text-brand" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-brand/10 rounded-full flex items-center justify-center mb-6">
+              <Target className="w-6 h-6 sm:w-8 sm:h-8 text-brand" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Our Mission</h2>
             <p className="text-lg text-muted leading-relaxed">
@@ -78,11 +78,11 @@ function MissionVisionSection() {
             </p>
           </div>
 
-          <div className={`bg-white p-8 rounded-2xl shadow-lg transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          <div className={`bg-white p-6 sm:p-8 rounded-2xl shadow-lg transition-all duration-700 delay-200 ${
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
-            <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mb-6">
-              <Leaf className="w-8 h-8 text-brand" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-brand/10 rounded-full flex items-center justify-center mb-6">
+              <Leaf className="w-6 h-6 sm:w-8 sm:h-8 text-brand" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Our Vision</h2>
             <p className="text-lg text-muted leading-relaxed">
@@ -113,7 +113,7 @@ function ValuesSection() {
     <section className="py-16 md:py-24 bg-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Values</h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
@@ -126,12 +126,12 @@ function ValuesSection() {
             <div
               key={value.title}
               className={`text-center transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <value.icon className="w-8 h-8 text-brand" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <value.icon className="w-6 h-6 sm:w-8 sm:h-8 text-brand" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">{value.title}</h3>
               <p className="text-sm text-muted">{value.description}</p>
@@ -159,7 +159,7 @@ function ApproachSection() {
     <section className="py-16 md:py-24 bg-gradient-to-b from-surface-secondary to-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Approach</h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
@@ -171,13 +171,13 @@ function ApproachSection() {
           {approaches.map((approach, index) => (
             <div
               key={approach.title}
-              className={`bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              className={`bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-700 ${
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="w-14 h-14 bg-brand/10 rounded-full flex items-center justify-center mb-4">
-                <approach.icon className="w-7 h-7 text-brand" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-brand/10 rounded-full flex items-center justify-center mb-4">
+                <approach.icon className="w-6 h-6 sm:w-7 sm:h-7 text-brand" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-3">{approach.title}</h3>
               <p className="text-muted leading-relaxed">{approach.description}</p>
@@ -207,7 +207,7 @@ function ImpactSection() {
     <section className="py-16 md:py-24 bg-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Our Impact in Numbers
@@ -239,8 +239,8 @@ function StatCard({ value, label, suffix, description, index, isVisible }: {
 
   return (
     <div
-      className={`text-center p-6 bg-gradient-to-br from-brand/5 to-brand/10 rounded-xl transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      className={`text-center p-4 sm:p-6 bg-gradient-to-br from-brand/5 to-brand/10 rounded-xl transition-all duration-700 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
@@ -267,7 +267,7 @@ function AccreditationsSection() {
     <section className="py-16 md:py-24 bg-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-sm font-semibold mb-4">
             Recognized & Trusted
@@ -285,18 +285,18 @@ function AccreditationsSection() {
           {accreditations.map((acc, index) => (
             <div
               key={acc.title}
-              className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-700 p-6 border-2 border-brand/20 hover:border-brand/50 ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+              className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-700 p-4 sm:p-6 border-2 border-brand/20 hover:border-brand/50 ${
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="flex flex-col items-center text-center">
                 <div className="relative mb-4">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand to-brand/70 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <div className="text-white">{acc.icon}</div>
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-brand to-brand/70 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-white [&>svg]:w-7 [&>svg]:h-7 sm:[&>svg]:w-9 sm:[&>svg]:h-9">{acc.icon}</div>
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-green-500 rounded-full flex items-center justify-center shadow-md">
-                    <CheckCircle size={16} className="text-white" fill="currentColor" />
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-green-500 rounded-full flex items-center justify-center shadow-md">
+                    <CheckCircle size={14} className="sm:w-4 sm:h-4 text-white" fill="currentColor" />
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-1">{acc.title}</h3>
@@ -309,8 +309,8 @@ function AccreditationsSection() {
           ))}
         </div>
 
-        <div className={`bg-gradient-to-r from-brand/5 to-brand/10 rounded-xl p-8 md:p-10 text-center border border-brand/20 transition-all duration-700 delay-500 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        <div className={`bg-gradient-to-r from-brand/5 to-brand/10 rounded-xl p-6 sm:p-8 md:p-10 text-center border border-brand/20 transition-all duration-700 delay-500 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
             <div className="flex flex-col items-center">
@@ -398,7 +398,7 @@ function TeamSection() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
       const newScrollLeft =
         scrollContainerRef.current.scrollLeft +
         (direction === 'left' ? -scrollAmount : scrollAmount);
@@ -413,7 +413,7 @@ function TeamSection() {
     <section className="py-16 md:py-24 bg-white">
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meet Our Team</h2>
@@ -429,10 +429,10 @@ function TeamSection() {
                 trackButtonClick('about_team_scroll_left');
               }}
               disabled={!canScrollLeft}
-              className="p-3 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
+              className="p-2.5 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
               aria-label="Scroll left"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => {
@@ -440,17 +440,17 @@ function TeamSection() {
                 trackButtonClick('about_team_scroll_right');
               }}
               disabled={!canScrollRight}
-              className="p-3 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
+              className="p-2.5 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
               aria-label="Scroll right"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
         <div
           ref={scrollContainerRef}
-          className={`flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth p-8 -m-8 transition-all duration-700 delay-200 ${
+          className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth py-4 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
@@ -463,7 +463,7 @@ function TeamSection() {
               key={member.name}
               className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
             >
-              <div className="relative h-80 overflow-hidden bg-gradient-to-br from-brand/10 to-brand/5">
+              <div className="relative h-64 sm:h-72 md:h-80 overflow-hidden bg-gradient-to-br from-brand/10 to-brand/5">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -471,7 +471,7 @@ function TeamSection() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
                 <p className="text-brand font-semibold mb-3">{member.role}</p>
                 <p className="text-muted leading-relaxed">{member.description}</p>
@@ -533,7 +533,7 @@ function CTASection() {
       
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className={`text-center mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Join Us in Making a Difference
@@ -550,13 +550,13 @@ function CTASection() {
               href={action.href}
               onClick={() => trackButtonClick(`about_cta_${action.title.toLowerCase().replace(/\s+/g, '_')}`)}
               className={`group transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-brand/30 h-full">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <action.icon className="w-8 h-8 text-white" strokeWidth={2} />
+              <div className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-brand/30 h-full">
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <action.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2} />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-brand transition-colors">
                   {action.title}

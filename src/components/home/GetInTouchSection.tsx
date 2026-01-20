@@ -105,7 +105,7 @@ function GetInTouchSectionComponent() {
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-12 md:mb-16 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-sm font-semibold mb-4">
             Contact Us
@@ -120,8 +120,8 @@ function GetInTouchSectionComponent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Information */}
-          <div className={`space-y-8 transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          <div className={`space-y-6 sm:space-y-8 transition-all duration-700 delay-200 ${
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
@@ -131,9 +131,9 @@ function GetInTouchSectionComponent() {
             </div>
 
             {/* Address */}
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-brand/10 flex items-center justify-center">
-                <MapPin size={24} className="text-brand" />
+            <div className="flex gap-3 sm:gap-4">
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-brand/10 flex items-center justify-center">
+                <MapPin size={20} className="sm:w-6 sm:h-6 text-brand" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Address</h4>
@@ -148,9 +148,9 @@ function GetInTouchSectionComponent() {
             </div>
 
             {/* Phone */}
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-brand/10 flex items-center justify-center">
-                <Phone size={24} className="text-brand" />
+            <div className="flex gap-3 sm:gap-4">
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-brand/10 flex items-center justify-center">
+                <Phone size={20} className="sm:w-6 sm:h-6 text-brand" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Phone</h4>
@@ -164,9 +164,9 @@ function GetInTouchSectionComponent() {
             </div>
 
             {/* Email */}
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-brand/10 flex items-center justify-center">
-                <Mail size={24} className="text-brand" />
+            <div className="flex gap-3 sm:gap-4">
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-brand/10 flex items-center justify-center">
+                <Mail size={20} className="sm:w-6 sm:h-6 text-brand" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Email</h4>
@@ -180,9 +180,9 @@ function GetInTouchSectionComponent() {
             </div>
 
             {/* Hours */}
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-brand/10 flex items-center justify-center">
-                <Clock size={24} className="text-brand" />
+            <div className="flex gap-3 sm:gap-4">
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-brand/10 flex items-center justify-center">
+                <Clock size={20} className="sm:w-6 sm:h-6 text-brand" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-2">Hours</h4>
@@ -192,8 +192,8 @@ function GetInTouchSectionComponent() {
           </div>
 
           {/* Contact Form */}
-          <div className={`bg-white rounded-xl shadow-lg p-8 border border-border transition-all duration-700 delay-400 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          <div className={`bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-border transition-all duration-700 delay-400 ${
+            isVisible ? 'opacity-100' : 'opacity-0'
           }`}>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Fields */}

@@ -20,7 +20,7 @@ function ProgramCard({ image, tag, title, description, href }: ProgramCardProps)
   return (
     <div className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
       {/* Image */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
         <Image
           src={image}
           alt={title}
@@ -29,13 +29,13 @@ function ProgramCard({ image, tag, title, description, href }: ProgramCardProps)
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         {/* Tag */}
-        <div className="absolute top-4 left-4 px-3 py-1 bg-brand text-white text-sm font-semibold rounded-full shadow-md">
+        <div className="absolute top-4 left-4 px-2.5 py-1 sm:px-3 bg-brand text-white text-xs sm:text-sm font-semibold rounded-full shadow-md">
           {tag}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2">
           {title}
         </h3>
@@ -111,7 +111,7 @@ function ProgramsSectionComponent() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
       const newScrollLeft =
         scrollContainerRef.current.scrollLeft +
         (direction === 'left' ? -scrollAmount : scrollAmount);
@@ -150,10 +150,10 @@ function ProgramsSectionComponent() {
                 trackButtonClick('programs_scroll_left');
               }}
               disabled={!canScrollLeft}
-              className="p-3 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
+              className="p-2.5 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
               aria-label="Scroll left"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => {
@@ -161,10 +161,10 @@ function ProgramsSectionComponent() {
                 trackButtonClick('programs_scroll_right');
               }}
               disabled={!canScrollRight}
-              className="p-3 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
+              className="p-2.5 rounded-full bg-white border-2 border-border hover:border-brand hover:bg-brand hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-border disabled:hover:text-foreground"
               aria-label="Scroll right"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
@@ -172,7 +172,7 @@ function ProgramsSectionComponent() {
         {/* Cards Slider */}
         <div
           ref={scrollContainerRef}
-          className={`flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth p-8 -m-8 transition-all duration-700 delay-200 ${
+          className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth py-4 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100' : 'opacity-0'
           }`}
           style={{

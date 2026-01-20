@@ -20,10 +20,10 @@ function StatCard({ icon, value, suffix, label, isVisible }: StatProps) {
   const count = useCounterAnimation(value, 2000, isVisible);
   
   return (
-    <div className={`flex flex-col items-center gap-2 p-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-700 ${
-      isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+    <div className={`flex flex-col items-center gap-2 p-4 sm:p-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-700 ${
+      isVisible ? 'opacity-100' : 'opacity-0'
     }`}>
-      <div className="text-brand">{icon}</div>
+      <div className="text-brand [&>svg]:w-7 [&>svg]:h-7 sm:[&>svg]:w-8 sm:[&>svg]:h-8">{icon}</div>
       <div className="text-3xl md:text-4xl font-bold text-foreground">
         {count}{suffix}
       </div>

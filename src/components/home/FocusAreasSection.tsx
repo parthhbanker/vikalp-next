@@ -28,10 +28,10 @@ function FocusAreaCard({ icon, title, description, color }: Omit<FocusAreaProps,
       <div className="p-6 md:p-8">
         {/* Icon */}
         <div
-          className="inline-flex items-center justify-center w-14 h-14 rounded-lg mb-4 transition-transform duration-300 group-hover:scale-110"
+          className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg mb-4 transition-transform duration-300 group-hover:scale-110"
           style={{ backgroundColor: `${color}15` }}
         >
-          <div style={{ color }}>{icon}</div>
+          <div style={{ color }} className="[&>svg]:w-6 [&>svg]:h-6 sm:[&>svg]:w-7 sm:[&>svg]:h-7">{icon}</div>
         </div>
 
         {/* Content */}
@@ -83,7 +83,7 @@ function FocusAreasSectionComponent() {
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-12 md:mb-16 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Our Focus Areas
@@ -100,7 +100,7 @@ function FocusAreasSectionComponent() {
             <div
               key={area.title}
               className={`transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
             >

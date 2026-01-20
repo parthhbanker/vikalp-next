@@ -31,7 +31,7 @@ function SDGSectionComponent() {
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className={`text-center mb-10 md:mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-sm font-semibold mb-4">
             UN Sustainable Development Goals
@@ -46,12 +46,12 @@ function SDGSectionComponent() {
         </div>
 
         {/* SDG Goals Grid */}
-        <div className="grid grid-cols-5 lg:grid-cols-10 gap-4 md:gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-5 lg:grid-cols-10 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
           {sdgGoals.map((goal, index) => (
             <div
               key={goal.number}
               className={`group relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:scale-105 ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+                isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ 
                 transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
