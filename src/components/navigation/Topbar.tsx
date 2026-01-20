@@ -17,11 +17,11 @@ function TopbarComponent() {
   };
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, url: 'https://facebook.com/vikalp', ariaLabel: 'Visit our Facebook page' },
-    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/vikalp', ariaLabel: 'Visit our Twitter profile' },
-    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/vikalp', ariaLabel: 'Visit our Instagram page' },
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/company/vikalp', ariaLabel: 'Visit our LinkedIn page' },
-    { name: 'YouTube', icon: Youtube, url: 'https://youtube.com/@vikalp', ariaLabel: 'Visit our YouTube channel' },
+    { name: 'Facebook', icon: Facebook, url: 'https://facebook.com/vikalpgroup', ariaLabel: 'Visit our Facebook page' },
+    { name: 'Twitter', icon: Twitter, url: 'https://x.com/vikalpgroup', ariaLabel: 'Visit our Twitter profile' },
+    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/vikalpahd', ariaLabel: 'Visit our Instagram page' },
+    { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/vikalpahd/', ariaLabel: 'Visit our LinkedIn page' },
+    { name: 'YouTube', icon: Youtube, url: 'https://youtube.com/vikalpgroup', ariaLabel: 'Visit our YouTube channel' },
   ];
 
   const handleSocialClick = useCallback((name: string, url: string) => {

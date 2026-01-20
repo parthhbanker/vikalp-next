@@ -49,11 +49,11 @@ function FooterComponent() {
   ];
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' },
-    { name: 'YouTube', icon: Youtube, href: '#' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/vikalpgroup' },
+    { name: 'Twitter', icon: Twitter, href: 'https://x.com/vikalpgroup' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/vikalpahd/' },
+    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/vikalpahd' },
+    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/vikalpgroup' },
   ];
 
   return (
@@ -139,6 +139,8 @@ function FooterComponent() {
                   <a
                     key={social.name}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => trackButtonClick(`footer_social_${social.name.toLowerCase()}`)}
                     className="w-10 h-10 rounded-full bg-white/10 hover:bg-brand flex items-center justify-center transition-all duration-200 hover:scale-110"
                     aria-label={social.name}
@@ -213,7 +215,7 @@ function FooterComponent() {
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link
-                href="/privacy"
+                href="/privacy-policy"
                 onClick={() => trackButtonClick('footer_privacy')}
                 className="text-gray-400 hover:text-brand transition-colors duration-200"
               >

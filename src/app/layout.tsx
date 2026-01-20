@@ -6,6 +6,7 @@ import { GTMScript, GTMNoScript } from "@/components/analytics/GTMScript";
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
 import { OutboundLinkTracker } from "@/components/analytics/OutboundLinkTracker";
 import { Topbar, Navbar, Footer } from "@/components/navigation";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

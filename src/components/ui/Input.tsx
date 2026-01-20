@@ -1,4 +1,6 @@
-import { InputHTMLAttributes, forwardRef, useState } from 'react';
+'use client';
+
+import { InputHTMLAttributes, forwardRef, useState, useId } from 'react';
 import { type LucideIcon, Eye, EyeOff } from 'lucide-react';
 import { trackFormInteraction } from '@/lib/analytics';
 
@@ -129,7 +131,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputType = isPasswordInput && showPassword ? 'text' : type;
 
     // Generate IDs for accessibility
-    const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const helperTextId = `${inputId}-helper`;
     const errorId = `${inputId}-error`;
 
