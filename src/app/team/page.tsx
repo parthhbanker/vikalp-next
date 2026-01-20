@@ -26,6 +26,17 @@ interface TeamMember {
 }
 
 function TeamMemberModal({ member, onClose }: { member: TeamMember; onClose: () => void }) {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = () => {
+    if (member.email) {
+      navigator.clipboard.writeText(member.email);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+      trackButtonClick(`team_modal_copy_email_${member.name.toLowerCase().replace(/\s+/g, '_')}`);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={onClose}>
       <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -122,16 +133,19 @@ function TeamMemberModal({ member, onClose }: { member: TeamMember; onClose: () 
 
           <div className="flex gap-3 pt-4">
             {member.email && (
-              <a href={`mailto:${member.email}`} className="flex-1">
-                <Button variant="primary" size="md" className="w-full">
+              <div className="flex-1">
+                <Button variant="primary" size="md" className="w-full" onClick={handleCopyEmail} trackingName={`team_modal_copy_email_${member.name.toLowerCase().replace(/\s+/g, '_')}`}>
                   <Mail size={18} className="mr-2" />
-                  Email
+                  {copiedEmail ? 'Email Copied!' : 'Copy Email'}
                 </Button>
-              </a>
+                {copiedEmail && (
+                  <p className="text-xs text-green-600 text-center mt-2">Email copied to clipboard!</p>
+                )}
+              </div>
             )}
             {member.phone && (
               <a href={`tel:${member.phone}`} className="flex-1">
-                <Button variant="outline" size="md" className="w-full">
+                <Button variant="outline" size="md" className="w-full" trackingName={`team_modal_call_${member.name.toLowerCase().replace(/\s+/g, '_')}`}>
                   <Phone size={18} className="mr-2" />
                   Call
                 </Button>
@@ -148,10 +162,10 @@ function HeroSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const stats = [
-    { icon: <Users size={32} strokeWidth={2} />, value: '3', label: 'Board Members' },
-    { icon: <Briefcase size={32} strokeWidth={2} />, value: '3', label: 'Management Team' },
-    { icon: <UserCog size={32} strokeWidth={2} />, value: '50+', label: 'Staff Members' },
-    { icon: <Heart size={32} strokeWidth={2} />, value: '50+', label: 'Volunteers' },
+    { icon: <Users size={32} strokeWidth={2} />, value: '5', label: 'Board Members' },
+    { icon: <Briefcase size={32} strokeWidth={2} />, value: '2', label: 'Management Team' },
+    { icon: <UserCog size={32} strokeWidth={2} />, value: '16', label: 'Staff Members' },
+    { icon: <Heart size={32} strokeWidth={2} />, value: '3', label: 'Volunteers' },
   ];
 
   return (
@@ -199,46 +213,55 @@ function BoardSection() {
   const board: TeamMember[] = [
     {
       name: 'Himanshu Banker',
-      role: 'Managing Director',
-      description: 'Managing Director of VIKALP, overseeing all organizational operations.',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop',
-      email: 'himanshu@vikalp.org',
-      phone: '+91 98765 43210',
-      linkedin: '#',
-      facebook: '#',
-      twitter: '#',
-      about: 'Himanshu Banker is the Managing Director of VIKALP with over 20 years of experience in sustainable development and community empowerment. He leads the organization\'s strategic vision and oversees all operations.',
-      education: ['MBA in Sustainability Management, Yale University', 'B.Tech in Environmental Engineering, IIT Delhi'],
-      experience: ['20+ years in sustainable development sector', 'Former consultant at UNDP and World Bank', 'Led multiple climate action projects across South Asia'],
-      expertise: ['Climate Change', 'Community Development', 'Policy Advocacy', 'Strategic Planning'],
+      role: 'Managing Trustee',
+      description: 'Managing Trustee of VIKALP, overseeing all organizational operations.',
+      image: 'https://ui-avatars.com/api/?name=Himanshu+Banker&size=400&background=22c55e&color=fff&bold=true',
+      email: 'md@vikalp.org',
+      phone: '+91 98243 85725',
+      about: 'Himanshu Banker is the Managing Trustee of VIKALP with over 20 years of experience in sustainable development and community empowerment.',
+      education: ['Environmental Management'],
+      experience: ['20+ years in sustainable development sector', 'Leading climate action projects across Gujarat'],
+      expertise: ['Climate Change', 'Community Development', 'Strategic Planning'],
+    },
+    {
+      name: 'Falguni Joshi',
+      role: 'Trustee',
+      description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
+      image: 'https://ui-avatars.com/api/?name=Falguni+Joshi&size=400&background=22c55e&color=fff&bold=true',
+      about: 'Falguni Joshi brings expertise in organizational governance and community development.',
+      education: ['Social Work'],
+      experience: ['Experience in NGO governance', 'Community development initiatives'],
+      expertise: ['Governance', 'Community Engagement'],
     },
     {
       name: 'Mahesh Pandya',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-      email: 'mahesh@vikalp.org',
-      phone: '+91 98765 43211',
-      linkedin: '#',
-      instagram: '#',
-      about: 'Mahesh Pandya brings extensive experience in environmental conservation and grassroots activism. As a trustee, he provides strategic guidance on biodiversity and conservation initiatives.',
-      education: ['M.Sc. in Environmental Science, Gujarat University', 'B.Sc. in Botany, M.S. University'],
-      experience: ['30+ years in environmental activism', 'Founder of multiple conservation NGOs', 'Advisor to Gujarat State Biodiversity Board'],
-      expertise: ['Biodiversity Conservation', 'Environmental Law', 'Grassroots Mobilization'],
+      image: 'https://ui-avatars.com/api/?name=Mahesh+Pandya&size=400&background=22c55e&color=fff&bold=true',
+      about: 'Mahesh Pandya brings extensive experience in environmental conservation and grassroots activism.',
+      education: ['Environmental Science'],
+      experience: ['30+ years in environmental activism', 'Conservation initiatives'],
+      expertise: ['Biodiversity Conservation', 'Environmental Law'],
     },
     {
-      name: 'Lila Chaudhari',
+      name: 'Vikesh Chauhan',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
-      email: 'lila@vikalp.org',
-      phone: '+91 98765 43212',
-      linkedin: '#',
-      facebook: '#',
-      about: 'Lila Chaudhari is a social entrepreneur and women\'s rights advocate with deep expertise in rural development. She champions women\'s empowerment and sustainable livelihoods at VIKALP.',
-      education: ['MA in Social Work, Tata Institute of Social Sciences', 'BA in Sociology, Delhi University'],
-      experience: ['25+ years in rural development and women empowerment', 'Former director at women\'s cooperative federation', 'Recipient of Nari Shakti Puraskar'],
-      expertise: ['Women Empowerment', 'Rural Development', 'Social Entrepreneurship', 'Microfinance'],
+      image: 'https://ui-avatars.com/api/?name=Vikesh+Chauhan&size=400&background=22c55e&color=fff&bold=true',
+      about: 'Vikesh Chauhan provides strategic guidance on rural development and agricultural initiatives.',
+      education: ['Rural Development'],
+      experience: ['Experience in rural development', 'Agricultural programs'],
+      expertise: ['Rural Development', 'Agriculture'],
+    },
+    {
+      name: 'Leelaben Chaudhari',
+      role: 'Trustee',
+      description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
+      image: 'https://ui-avatars.com/api/?name=Leelaben+Chaudhari&size=400&background=22c55e&color=fff&bold=true',
+      about: 'Leelaben Chaudhari is a social advocate with expertise in women empowerment and community development.',
+      education: ['Social Work'],
+      experience: ['Experience in women empowerment', 'Community development'],
+      expertise: ['Women Empowerment', 'Community Development'],
     },
   ];
 
@@ -294,46 +317,26 @@ function ManagementSection() {
 
   const management: TeamMember[] = [
     {
-      name: 'Rajesh Kumar',
-      role: 'Operations Manager',
-      description: 'Managing day-to-day operations and organizational efficiency.',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop',
-      email: 'rajesh@vikalp.org',
-      phone: '+91 98765 43213',
-      linkedin: '#',
-      twitter: '#',
-      about: 'Rajesh Kumar oversees all operational aspects of VIKALP, ensuring smooth execution of programs and efficient resource management across all field locations.',
-      education: ['MBA in Operations Management, IIM Ahmedabad', 'B.E. in Mechanical Engineering, NIT Surat'],
-      experience: ['15+ years in operations and project management', 'Former operations head at international NGO', 'Certified Project Management Professional (PMP)'],
-      expertise: ['Operations Management', 'Project Planning', 'Resource Optimization', 'Team Leadership'],
+      name: 'Hitesh Katad',
+      role: 'Legal & Finance Manager',
+      description: 'Managing legal and financial operations, compliance, and audits.',
+      image: 'https://ui-avatars.com/api/?name=Hitesh+Katad&size=400&background=22c55e&color=fff&bold=true',
+      email: 'finance@vikalp.org',
+      about: 'Hitesh Katad manages all legal and financial operations at VIKALP, maintaining financial records, monitoring funds, verifying donations, and coordinating with external auditors for statutory compliance.',
+      education: ['Bachelor of Arts (B.A.)'],
+      experience: ['Nearly 20 years of experience working with NGOs since 2005', 'Worked with Pragati Prayas Kendra, SWATI, BAAG, Ashray Foundation', 'Expert in financial record-keeping, fund tracking, and audit coordination'],
+      expertise: ['Financial Management', 'Legal Compliance', 'Audit Coordination', 'Fund Monitoring'],
     },
     {
-      name: 'Priya Patel',
-      role: 'Program Director',
-      description: 'Overseeing program development and implementation strategies.',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop',
-      email: 'priya@vikalp.org',
-      phone: '+91 98765 43214',
-      linkedin: '#',
-      instagram: '#',
-      about: 'Priya Patel leads program design and implementation at VIKALP, focusing on innovative approaches to sustainable agriculture and community development.',
-      education: ['M.Sc. in Rural Development, IRMA', 'B.Sc. in Agriculture, Anand Agricultural University'],
-      experience: ['12+ years in program management and rural development', 'Designed award-winning agroforestry programs', 'Expert in participatory development approaches'],
-      expertise: ['Program Design', 'Sustainable Agriculture', 'Community Engagement', 'Impact Assessment'],
-    },
-    {
-      name: 'Amit Shah',
-      role: 'Finance Director',
-      description: 'Leading financial planning, budgeting, and resource management.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
-      email: 'amit@vikalp.org',
-      phone: '+91 98765 43215',
-      linkedin: '#',
-      facebook: '#',
-      about: 'Amit Shah manages all financial operations at VIKALP, ensuring transparency, compliance, and optimal utilization of resources to maximize program impact.',
-      education: ['CA (Chartered Accountant), ICAI', 'B.Com, Gujarat University'],
-      experience: ['18+ years in financial management for NGOs', 'Former finance manager at international development organization', 'Expert in donor compliance and reporting'],
-      expertise: ['Financial Management', 'Budgeting & Forecasting', 'Donor Compliance', 'Audit & Taxation'],
+      name: 'Parth Banker',
+      role: 'Digital Operations Manager',
+      description: 'Managing website, social media, and digital monitoring systems.',
+      image: 'https://ui-avatars.com/api/?name=Parth+Banker&size=400&background=22c55e&color=fff&bold=true',
+      email: 'parth@vikalp.org',
+      about: 'Parth Banker manages digital operations at VIKALP, including website management, social media, project reporting, and digital monitoring of afforestation data.',
+      education: ['B.Sc. IT (Software Development)'],
+      experience: ['Working with NGOs since 2023', 'IT experience since 2021', 'Managing VIKALP website and social media', 'Digital data monitoring for afforestation projects'],
+      expertise: ['Website Management', 'Social Media', 'Digital Monitoring', 'Project Reporting'],
     },
   ];
 
@@ -388,15 +391,22 @@ function StaffSection() {
   const [visibleCount, setVisibleCount] = useState(6);
 
   const staff = [
-    { name: 'Sneha Desai', role: 'Field Coordinator', description: 'Coordinating field operations and community programs.', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop' },
-    { name: 'Kiran Mehta', role: 'Communications Officer', description: 'Managing communications and stakeholder engagement.', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop' },
-    { name: 'Ravi Sharma', role: 'Training Specialist', description: 'Conducting farmer training and capacity building.', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop' },
-    { name: 'Anjali Joshi', role: 'Monitoring & Evaluation', description: 'Tracking program impact and data analysis.', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop' },
-    { name: 'Vikram Patel', role: 'Agriculture Expert', description: 'Providing technical guidance on sustainable farming.', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop' },
-    { name: 'Meera Singh', role: 'Community Mobilizer', description: 'Building community relationships and engagement.', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop' },
-    { name: 'Rahul Verma', role: 'Project Coordinator', description: 'Managing project timelines and deliverables.', image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop' },
-    { name: 'Pooja Nair', role: 'Research Analyst', description: 'Conducting research and impact assessments.', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop' },
-    { name: 'Suresh Kumar', role: 'Logistics Manager', description: 'Handling logistics and supply chain operations.', image: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop' },
+    { name: 'Jahersingh Gamit', role: 'Field Coordinator', description: 'Coordinating field operations and community programs.', image: 'https://ui-avatars.com/api/?name=Jahersingh+Gamit&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Sudina Valvi', role: 'Field Coordinator', description: 'Coordinating field operations and community programs.', image: 'https://ui-avatars.com/api/?name=Sudina+Valvi&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Sunanda Palva', role: 'Field Coordinator', description: 'Coordinating field operations and community programs.', image: 'https://ui-avatars.com/api/?name=Sunanda+Palva&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Ashwin Gamit', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Ashwin+Gamit&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Chhaya Vasave', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Chhaya+Vasave&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Jharana Chaudhari', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Jharana+Chaudhari&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Jyotsna Chaudhari', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Jyotsna+Chaudhari&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Krishna Bhil', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Krishna+Bhil&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Lila Rathod', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Lila+Rathod&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Manesh Padvi', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Manesh+Padvi&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Manoj Patel', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Manoj+Patel&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Rajendra Rathod', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Rajendra+Rathod&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Raju Vasava', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Raju+Vasava&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Sunil Konkani', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Sunil+Konkani&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Sunil Thorat', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Sunil+Thorat&size=400&background=22c55e&color=fff&bold=true' },
+    { name: 'Yogita Gamit', role: 'Field Executive', description: 'Implementing field programs and community engagement.', image: 'https://ui-avatars.com/api/?name=Yogita+Gamit&size=400&background=22c55e&color=fff&bold=true' },
   ];
 
   const displayedStaff = staff.slice(0, visibleCount);
@@ -489,7 +499,7 @@ function VolunteersSection() {
             Passionate individuals contributing their time and skills to our mission
           </p>
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg max-w-3xl mx-auto">
-            <div className="text-5xl md:text-6xl font-bold text-brand mb-4">50+</div>
+            <div className="text-5xl md:text-6xl font-bold text-brand mb-4">3</div>
             <p className="text-xl text-foreground font-semibold mb-3">Active Volunteers</p>
             <p className="text-muted leading-relaxed mb-6">
               Our volunteers play a crucial role in program implementation, community outreach, and capacity building initiatives across Gujarat.

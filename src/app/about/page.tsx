@@ -354,31 +354,45 @@ function TeamSection() {
       checkScrollPosition();
       container.addEventListener('scroll', checkScrollPosition);
       window.addEventListener('resize', checkScrollPosition);
+      // Initial check after a short delay to ensure content is rendered
+      setTimeout(checkScrollPosition, 100);
       return () => {
         container.removeEventListener('scroll', checkScrollPosition);
         window.removeEventListener('resize', checkScrollPosition);
       };
     }
-  }, []);
+  }, [isVisible]);
 
   const team = [
     {
       name: 'Himanshu Banker',
-      role: 'Managing Director',
-      description: 'Managing Director of VIKALP, overseeing all organizational operations and strategic initiatives.',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop',
+      role: 'Managing Trustee',
+      description: 'Managing Trustee of VIKALP, overseeing all organizational operations and strategic initiatives.',
+      image: 'https://ui-avatars.com/api/?name=Himanshu+Banker&size=400&background=22c55e&color=fff&bold=true',
+    },
+    {
+      name: 'Falguni Joshi',
+      role: 'Trustee',
+      description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
+      image: 'https://ui-avatars.com/api/?name=Falguni+Joshi&size=400&background=22c55e&color=fff&bold=true',
     },
     {
       name: 'Mahesh Pandya',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+      image: 'https://ui-avatars.com/api/?name=Mahesh+Pandya&size=400&background=22c55e&color=fff&bold=true',
     },
     {
-      name: 'Lila Chaudhari',
+      name: 'Vikesh Chauhan',
       role: 'Trustee',
       description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
+      image: 'https://ui-avatars.com/api/?name=Vikesh+Chauhan&size=400&background=22c55e&color=fff&bold=true',
+    },
+    {
+      name: 'Leelaben Chaudhari',
+      role: 'Trustee',
+      description: 'Trustee of VIKALP, contributing to governance and strategic oversight.',
+      image: 'https://ui-avatars.com/api/?name=Leelaben+Chaudhari&size=400&background=22c55e&color=fff&bold=true',
     },
   ];
 
