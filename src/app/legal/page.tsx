@@ -463,7 +463,7 @@ function AccreditationsContent({ searchQuery }: { searchQuery: string }) {
 }
 
 function ReportsContent({ searchQuery }: { searchQuery: string }) {
-  const reports = [
+  const reports: Array<{ year: string; title: string; file: string }> = [
     // Add report files here when available
   ];
 
