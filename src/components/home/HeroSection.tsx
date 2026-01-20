@@ -92,7 +92,7 @@ function HeroSectionComponent() {
               </Button>
             </Link>
             <Link
-              href="/about"
+              href="/about-us"
               onClick={() => trackButtonClick('hero_learn_more')}
             >
               <Button

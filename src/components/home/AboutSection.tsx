@@ -45,7 +45,7 @@ function AboutSectionComponent() {
             </div>
 
             {/* CTA */}
-            <Link href="/about" onClick={() => trackButtonClick('about_section_learn_more')}>
+            <Link href="/about-us" onClick={() => trackButtonClick('about_section_learn_more')}>
               <Button variant="primary" size="lg" trackingName="about_section_learn_more_button">
                 Learn More About Us
                 <ArrowRight size={20} className="ml-2" />

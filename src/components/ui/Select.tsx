@@ -69,10 +69,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       enableTracking = false,
       onFocus,
       onBlur,
+      id,
       ...props
     },
     ref
   ) => {
+    const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
     // Determine icon size based on input size if not explicitly set
     const getIconSize = () => {
       if (iconSize) return iconSize;
@@ -126,7 +128,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className={`${fullWidth ? 'w-full' : ''} ${wrapperClassName}`}>
         {/* Label */}
         {label && (
-          <label className="block text-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={selectId} className="block text-sm font-medium text-foreground mb-1.5">
             {label}
             {required && <span className="text-red-500 ml-1">*</span>}
           </label>
@@ -151,10 +153,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {/* Select */}
           <select
             ref={ref}
+            id={selectId}
             disabled={disabled}
             required={required}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            aria-label={!label ? props.name || 'Select option' : undefined}
             className={`
               w-full rounded-lg border appearance-none cursor-pointer
               ${sizeClasses[size]}

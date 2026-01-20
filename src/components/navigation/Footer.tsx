@@ -26,7 +26,7 @@ function FooterComponent() {
     }, 1500);
   };
   const quickLinks = [
-    { name: 'About Us', href: '/about' },
+    { name: 'About Us', href: '/about-us' },
     { name: 'Our Team', href: '/team' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Publications', href: '/publications' },
@@ -35,10 +35,10 @@ function FooterComponent() {
   ];
 
   const ourWork = [
-    { name: 'Climate Action', href: '/programs#climate-action' },
-    { name: 'Sustainable Agriculture', href: '/programs#sustainable-agriculture' },
-    { name: 'Community Empowerment', href: '/programs#community-empowerment' },
-    { name: 'Environmental Education', href: '/programs#environmental-education' },
+    { name: 'Climate Action', href: '/our-programs#climate-action' },
+    { name: 'Sustainable Agriculture', href: '/our-programs#sustainable-agriculture' },
+    { name: 'Community Empowerment', href: '/our-programs#community-empowerment' },
+    { name: 'Environmental Education', href: '/our-programs#environmental-education' },
   ];
 
   const support = [

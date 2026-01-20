@@ -89,7 +89,7 @@ function ProgramsSectionComponent() {
       title: "Bhoomi Producers' Collective",
       description:
         "Community Based Organization with 5000+ indigenous agroforest producers families for social and economic empowerment with Nature Conservation.",
-      href: '/programs#bhoomi-collective',
+      href: '/our-programs#bhoomi-collective',
     },
     {
       image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop',
@@ -97,7 +97,7 @@ function ProgramsSectionComponent() {
       title: 'Regenerative Sustainable Agriculture',
       description:
         'Traditional grains and millet farming with organic fertilizers, promoting organic millets and traditional food with seed bank support.',
-      href: '/programs#regenerative-agriculture',
+      href: '/our-programs#regenerative-agriculture',
     },
     {
       image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop',
@@ -105,7 +105,7 @@ function ProgramsSectionComponent() {
       title: 'TREES & Biodiversity Sites',
       description:
         'Thuti Rural Experimental and Exposure Site with 3 dedicated biodiversity sites (4,000+ trees each) for research, carbon credits.',
-      href: '/programs#trees-biodiversity',
+      href: '/our-programs#trees-biodiversity',
     },
   ];
 
@@ -187,7 +187,7 @@ function ProgramsSectionComponent() {
 
         {/* View All Programs CTA */}
         <div className="text-center mt-12">
-          <Link href="/programs" onClick={() => trackButtonClick('programs_section_view_all')}>
+          <Link href="/our-programs" onClick={() => trackButtonClick('programs_section_view_all')}>
             <Button variant="outline" size="lg" trackingName="programs_section_view_all_button">
               View All Programs
               <ArrowRight size={20} className="ml-2" />

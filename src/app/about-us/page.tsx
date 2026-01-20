@@ -11,7 +11,7 @@ import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 
 function HeroSection() {
   return (
-    <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[60vh] min-h-125 flex items-center justify-center overflow-hidden">
       <Image
         src="/about.png"
         alt="VIKALP - Growing the Future Together"
@@ -521,7 +521,7 @@ function CTASection() {
       icon: Target,
       title: 'View Our Programs',
       description: 'Explore our initiatives and find partnership opportunities',
-      href: '/programs',
+      href: '/our-programs',
       color: 'from-green-600 to-green-700',
     },
   ];

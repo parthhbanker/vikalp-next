@@ -12,8 +12,8 @@ import { trackButtonClick } from '@/lib/analytics';
  * Navigation Menu Items
  */
 export const menuItems = [
-  { name: 'About Us', href: '/about', hasDropdown: false },
-  { name: 'Programs', href: '/programs', hasDropdown: false },
+  { name: 'About Us', href: '/about-us', hasDropdown: false },
+  { name: 'Programs', href: '/our-programs', hasDropdown: false },
   { name: 'Publications', href: '/publications', hasDropdown: false },
   { name: 'Our Team', href: '/team', hasDropdown: false },
   { name: 'Gallery', href: '/gallery', hasDropdown: false },
