@@ -421,7 +421,7 @@ function CertificationsContent({ searchQuery }: { searchQuery: string }) {
 }
 
 function AccreditationsContent({ searchQuery }: { searchQuery: string }) {
-  const accreditations = [
+  const accreditations: Array<{ title: string; file: string; type: string }> = [
     // Add accreditation files here when available
   ];
 
