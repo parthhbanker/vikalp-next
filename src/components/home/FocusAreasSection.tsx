@@ -1,27 +1,22 @@
 'use client';
 
 import { memo } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui';
 import {
   Leaf,
   CloudRain,
   Users,
   Trees,
-  ArrowRight,
 } from 'lucide-react';
-import { trackButtonClick } from '@/lib/analytics';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface FocusAreaProps {
   icon: React.ReactNode;
   title: string;
   description: string;
-  href: string;
   color: string;
 }
 
-function FocusAreaCard({ icon, title, description, href, color }: FocusAreaProps) {
+function FocusAreaCard({ icon, title, description, color }: Omit<FocusAreaProps, 'href'>) {
   return (
     <div className="group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-border hover:border-brand/30">
       {/* Colored accent bar */}
@@ -43,17 +38,7 @@ function FocusAreaCard({ icon, title, description, href, color }: FocusAreaProps
         <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
           {title}
         </h3>
-        <p className="text-muted mb-6 leading-relaxed">{description}</p>
-
-        {/* Learn More Link */}
-        <Link
-          href={href}
-          onClick={() => trackButtonClick(`focus_area_${title.toLowerCase().replace(/\s+/g, '_')}`)}
-          className="inline-flex items-center gap-2 text-brand font-medium hover:gap-3 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded"
-        >
-          Learn More
-          <ArrowRight size={18} />
-        </Link>
+        <p className="text-muted leading-relaxed">{description}</p>
       </div>
     </div>
   );
@@ -68,7 +53,6 @@ function FocusAreasSectionComponent() {
       title: 'Climate Change & SDGs',
       description:
         'Leading climate action initiatives aligned with UN Sustainable Development Goals, building resilience in vulnerable communities.',
-      href: '/programs#climate-change',
       color: '#3F7E44',
     },
     {
@@ -76,7 +60,6 @@ function FocusAreasSectionComponent() {
       title: 'Agroforestry & Biodiversity',
       description:
         'Promoting sustainable agricultural practices integrated with forestry, enhancing biodiversity and ecosystem services.',
-      href: '/programs#agroforestry',
       color: '#56C02B',
     },
     {
@@ -84,7 +67,6 @@ function FocusAreasSectionComponent() {
       title: 'Women Empowerment',
       description:
         'Empowering women through skill development, leadership training, and economic opportunities for sustainable livelihoods.',
-      href: '/programs#women-empowerment',
       color: '#FF3A21',
     },
     {
@@ -92,7 +74,6 @@ function FocusAreasSectionComponent() {
       title: 'Natural Resource Management',
       description:
         'Sustainable management of land, water, and forest resources through traditional knowledge and modern practices.',
-      href: '/programs#natural-resources',
       color: '#00689D',
     },
   ];
@@ -114,7 +95,7 @@ function FocusAreasSectionComponent() {
         </div>
 
         {/* Focus Areas Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {focusAreas.map((area, index) => (
             <div
               key={area.title}
@@ -126,16 +107,6 @@ function FocusAreasSectionComponent() {
               <FocusAreaCard {...area} />
             </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <Link href="/programs" onClick={() => trackButtonClick('focus_areas_view_all')}>
-            <Button variant="outline" size="lg" trackingName="focus_areas_view_all_button">
-              View All Programs
-              <ArrowRight size={20} className="ml-2" />
-            </Button>
-          </Link>
         </div>
       </div>
     </section>

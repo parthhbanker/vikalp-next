@@ -75,7 +75,7 @@ function HeroSectionComponent() {
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-muted mb-8 leading-relaxed max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
             Empowering indigenous and deprived communities in Gujarat through climate action,
-            agroforestry, and sustainable livelihoods since 2002.
+            agroforestry, and sustainable livelihoods since 2002 - 23+ years of service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up animation-delay-400">
             <Link

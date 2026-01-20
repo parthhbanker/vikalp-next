@@ -110,7 +110,7 @@ function AccreditationsSectionComponent() {
         }`}>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
             <div className="flex flex-col items-center">
-              <div className="text-4xl font-bold text-brand mb-2">20+</div>
+              <div className="text-4xl font-bold text-brand mb-2">23+</div>
               <div className="text-sm text-muted">Years of Service</div>
             </div>
             <div className="hidden md:block w-px h-16 bg-brand/30" />
