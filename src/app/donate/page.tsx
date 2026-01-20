@@ -239,10 +239,10 @@ function PaymentMethodsSection() {
       description: 'Transfer directly to our bank account. Please email us at info@vikalp.org with transfer details for your 80G receipt.',
       details: [
         { label: 'Account Name:', value: 'VIKALP' },
-        { label: 'Account Number:', value: '1234567890' },
-        { label: 'Bank Name:', value: 'State Bank of India' },
-        { label: 'IFSC Code:', value: 'SBIN0123456' },
-        { label: 'Branch:', value: 'Ahmedabad' },
+        { label: 'Account Number:', value: '006701009768' },
+        { label: 'Bank Name:', value: 'ICICI Bank' },
+        { label: 'IFSC Code:', value: 'ICIC0000067' },
+        { label: 'Branch:', value: 'Jodhpur Gam Branch' },
       ],
     },
     {
