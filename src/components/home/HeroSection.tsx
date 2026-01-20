@@ -59,25 +59,25 @@ function HeroSectionComponent() {
   return (
     <section className="relative bg-gradient-to-br from-brand/5 via-white to-brand/10 overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5" aria-hidden="true">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
           backgroundSize: '40px 40px',
         }} />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-28">
         {/* Hero Content */}
-        <div className="text-center max-w-4xl mx-auto mb-12 md:mb-16">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-fade-in-up">
+        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-14">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4 leading-tight">
             Let's Grow<br />
             the Future <span className="text-brand">Together</span>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-muted mb-8 leading-relaxed max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted mb-6 leading-relaxed max-w-3xl mx-auto">
             Empowering indigenous and deprived communities in Gujarat through climate action,
             agroforestry, and sustainable livelihoods since 2002 - 23+ years of service.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up animation-delay-400">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/donate"
               onClick={() => trackButtonClick('hero_donate_cta')}
@@ -107,7 +107,7 @@ function HeroSectionComponent() {
         </div>
 
         {/* Stats */}
-        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
           {stats.map((stat, index) => (
             <StatCard
               key={stat.label}

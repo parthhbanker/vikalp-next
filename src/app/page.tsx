@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
-import {
-  HeroSection,
-  AboutSection,
-  SDGSection,
-  ProgramsSection,
-  FocusAreasSection,
-  AccreditationsSection,
-  GetInTouchSection,
-} from '@/components/home';
+import dynamic from 'next/dynamic';
+import { HeroSection } from '@/components/home';
+
+const AboutSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.AboutSection })));
+const SDGSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.SDGSection })));
+const ProgramsSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.ProgramsSection })));
+const FocusAreasSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.FocusAreasSection })));
+const AccreditationsSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.AccreditationsSection })));
+const GetInTouchSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.GetInTouchSection })));
 
 export const metadata: Metadata = {
   title: 'Vikalp - Sustainable Development for Indigenous Communities in Gujarat',
