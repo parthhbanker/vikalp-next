@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vikalp - Empowering Agriculture",
-  description: "Vikalp NGO - Transforming lives through sustainable agriculture and rural development",
+  title: "VIKALP - Empowering Communities for Sustainable Development",
+  description: "VIKALP NGO - Transforming lives through sustainable agriculture, climate action, and rural development since 2002",
 };
 
 export default function RootLayout({
