@@ -232,8 +232,8 @@ function PublicationsListSection() {
           </p>
 
           <div className="bg-surface-secondary/50 rounded-xl p-6">
-            <div className="flex flex-col lg:flex-row gap-4">
-              <div className="relative flex-1">
+            <div className="flex flex-col gap-4">
+              <div className="relative w-full">
                 <label htmlFor="search-publications" className="sr-only">Search publications</label>
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" size={20} aria-hidden="true" />
                 <input
@@ -247,7 +247,7 @@ function PublicationsListSection() {
                 />
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                 <label className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors">
                   <input
                     type="checkbox"
