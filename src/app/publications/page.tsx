@@ -45,6 +45,7 @@ function PublicationsListSection() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedLanguage, setSelectedLanguage] = useState('all');
   const [selectedYear, setSelectedYear] = useState('all');
+  const [selectedFeatured, setSelectedFeatured] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
 
   const getCategoryIcon = (category: string) => {
@@ -59,98 +60,144 @@ function PublicationsListSection() {
 
   const categories = [
     { id: 'all', label: 'All Types' },
-    { id: 'research', label: 'Research Papers' },
+    { id: 'research', label: 'Analytical Reports' },
     { id: 'report', label: 'Annual Reports' },
-    { id: 'case-study', label: 'Case Studies' },
     { id: 'guide', label: 'Guides' },
   ];
 
   const languages = [
     { id: 'all', label: 'All Languages' },
     { id: 'english', label: 'English' },
-    { id: 'gujarati', label: 'Gujarati' },
-    { id: 'hindi', label: 'Hindi' },
   ];
 
   const years = [
     { id: 'all', label: 'All Years' },
-    { id: '2023', label: '2023' },
-    { id: '2022', label: '2022' },
-    { id: '2021', label: '2021' },
+    { id: '2025', label: '2025' },
+    { id: '2024', label: '2024' },
   ];
 
   const publications = [
     {
       id: 1,
-      slug: 'agroforestry-impact-assessment-2023',
-      title: 'Agroforestry Impact Assessment 2023',
-      category: 'research',
+      slug: 'vikalp-gcg-afforestation-annual-report-2025-26',
+      title: 'VIKALP GCG Afforestation Program Annual Report 2025-26',
+      category: 'report',
       language: 'english',
-      year: 2023,
+      year: 2025,
       pages: 45,
-      downloads: 1250,
-      description: 'Comprehensive study on the impact of agroforestry practices on farmer income and biodiversity in South Gujarat.',
-      fileUrl: '#',
+      downloads: 234,
+      featured: true,
+      description: 'Comprehensive annual report on the GCG Afforestation Program covering activities, achievements, and impact for the year 2025-26.',
+      fileUrl: '/pubilcations/reports/VIKALP_GCG_Afforestation Program Annual Report_2025-26.pdf',
     },
     {
       id: 2,
-      slug: 'annual-report-2022-23',
-      title: 'Annual Report 2022-23',
+      slug: 'vikalp-u2g-afforestation-annual-report-2025-26',
+      title: 'VIKALP U2G Afforestation Program Annual Report 2025-26',
       category: 'report',
       language: 'english',
-      year: 2023,
-      pages: 68,
-      downloads: 2100,
-      description: 'Complete overview of our programs, achievements, and financial statements for the year 2022-23.',
-      fileUrl: '#',
+      year: 2025,
+      pages: 42,
+      downloads: 198,
+      featured: true,
+      description: 'Annual report documenting the U2G Afforestation Program implementation, outcomes, and community impact for 2025-26.',
+      fileUrl: '/pubilcations/reports/VIKALP_U2G_Afforestation Program Annual Report_2025-26.pdf',
     },
     {
       id: 3,
-      slug: 'women-empowerment-green-entrepreneurship',
-      title: 'Women Empowerment Through Green Entrepreneurship',
-      category: 'case-study',
+      slug: 'vikalp-gcg-2025-analytical-report',
+      title: 'VIKALP GCG 2025 Analytical Report',
+      category: 'research',
       language: 'english',
-      year: 2023,
-      pages: 32,
-      downloads: 890,
-      description: 'Success stories and learnings from our women-led sustainable business initiatives.',
-      fileUrl: '#',
+      year: 2025,
+      pages: 68,
+      downloads: 312,
+      description: 'In-depth analytical assessment of the GCG program performance, data analysis, and key insights for 2025.',
+      fileUrl: '/pubilcations/reports/Annex-A_VIKALP_GCG 2025 ANALYTICAL REPORT.pdf',
     },
     {
       id: 4,
-      slug: 'miyawaki-forest-implementation-guide',
-      title: 'Miyawaki Forest Implementation Guide',
-      category: 'guide',
-      language: 'gujarati',
-      year: 2022,
-      pages: 28,
-      downloads: 1560,
-      description: 'Step-by-step guide for implementing Miyawaki method forests in urban and rural areas.',
-      fileUrl: '#',
+      slug: 'vikalp-u2g-2025-analytical-report',
+      title: 'VIKALP U2G 2025 Analytical Report',
+      category: 'research',
+      language: 'english',
+      year: 2025,
+      pages: 64,
+      downloads: 287,
+      description: 'Detailed analytical study of the U2G program metrics, outcomes, and strategic recommendations for 2025.',
+      fileUrl: '/pubilcations/reports/Annex-A_VIKALP_U2G 2025 ANALYTICAL REPORT.pdf',
     },
     {
       id: 5,
-      slug: 'climate-resilience-tribal-communities',
-      title: 'Climate Resilience in Tribal Communities',
+      slug: 'vikalp-gcg-2024-analytical-report',
+      title: 'VIKALP GCG 2024 Analytical Report',
       category: 'research',
       language: 'english',
-      year: 2022,
-      pages: 52,
-      downloads: 1340,
-      description: 'Research on climate adaptation strategies adopted by indigenous communities in Gujarat.',
-      fileUrl: '#',
+      year: 2024,
+      pages: 62,
+      downloads: 445,
+      description: 'Comprehensive analytical review of the GCG program activities and impact assessment for 2024.',
+      fileUrl: '/pubilcations/reports/Annex-B_VIKALP_GCG 2024 ANALYTICAL REPORT.pdf',
     },
     {
       id: 6,
-      slug: 'traditional-seed-conservation-manual',
-      title: 'Traditional Seed Conservation Manual',
+      slug: 'vikalp-u2g-2024-analytical-report',
+      title: 'VIKALP U2G 2024 Analytical Report',
+      category: 'research',
+      language: 'english',
+      year: 2024,
+      pages: 58,
+      downloads: 421,
+      description: 'Analytical evaluation of the U2G program implementation and results for the year 2024.',
+      fileUrl: '/pubilcations/reports/Annex-B_VIKALP_U2G 2024 ANALYTICAL REPORT.pdf',
+    },
+    {
+      id: 7,
+      slug: 'rf-awareness-pamphlet-1',
+      title: 'RF Awareness Pamphlet - Part 1',
       category: 'guide',
-      language: 'hindi',
-      year: 2022,
-      pages: 24,
-      downloads: 980,
-      description: 'Practical guide for preserving and propagating traditional crop varieties.',
-      fileUrl: '#',
+      language: 'english',
+      year: 2025,
+      pages: 2,
+      downloads: 156,
+      description: 'Educational pamphlet on rainforest awareness and conservation practices for community outreach.',
+      fileUrl: '/pubilcations/awareness/RF Awareness Pamphlet-1.pdf',
+    },
+    {
+      id: 8,
+      slug: 'rf-awareness-pamphlet-2',
+      title: 'RF Awareness Pamphlet - Part 2',
+      category: 'guide',
+      language: 'english',
+      year: 2025,
+      pages: 2,
+      downloads: 143,
+      description: 'Continuation of rainforest awareness materials with practical tips and community engagement strategies.',
+      fileUrl: '/pubilcations/awareness/RF Awareness Pamphlet-2.pdf',
+    },
+    {
+      id: 9,
+      slug: 'plantation-form-2025',
+      title: 'Plantation Form 2025',
+      category: 'guide',
+      language: 'english',
+      year: 2025,
+      pages: 4,
+      downloads: 289,
+      description: 'Official plantation registration and documentation form for tree planting initiatives in 2025.',
+      fileUrl: '/pubilcations/awareness/Plantation Form 2025.pdf',
+    },
+    {
+      id: 10,
+      slug: 'vikalp-planner-april25-march26',
+      title: 'VIKALP Planner April 2025 - March 2026',
+      category: 'guide',
+      language: 'english',
+      year: 2025,
+      pages: 12,
+      downloads: 178,
+      description: 'Annual planner outlining VIKALP activities, events, and milestones for the year April 2025 to March 2026.',
+      fileUrl: '/pubilcations/awareness/Planner VIKALP April25-March26.pdf',
     },
   ];
 
@@ -161,7 +208,10 @@ function PublicationsListSection() {
       const matchesCategory = selectedCategory === 'all' || pub.category === selectedCategory;
       const matchesLanguage = selectedLanguage === 'all' || pub.language === selectedLanguage;
       const matchesYear = selectedYear === 'all' || pub.year.toString() === selectedYear;
-      return matchesSearch && matchesCategory && matchesLanguage && matchesYear;
+      const matchesFeatured = selectedFeatured === 'all' || 
+                             (selectedFeatured === 'featured' && pub.featured) ||
+                             (selectedFeatured === 'regular' && !pub.featured);
+      return matchesSearch && matchesCategory && matchesLanguage && matchesYear && matchesFeatured;
     })
     .sort((a, b) => {
       if (sortBy === 'newest') return b.year - a.year;
@@ -198,6 +248,16 @@ function PublicationsListSection() {
               </div>
 
               <div className="flex flex-wrap gap-3">
+                <label className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={selectedFeatured === 'featured'}
+                    onChange={(e) => setSelectedFeatured(e.target.checked ? 'featured' : 'all')}
+                    className="w-4 h-4 text-brand border-gray-300 rounded focus:ring-2 focus:ring-brand"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Featured Only</span>
+                </label>
+
                 <label htmlFor="category-filter" className="sr-only">Filter by category</label>
                 <select
                   id="category-filter"
@@ -268,6 +328,11 @@ function PublicationsListSection() {
               >
                 <div className="relative h-48 bg-gradient-to-br from-brand/10 to-brand/5 flex items-center justify-center">
                   <CategoryIcon className="w-20 h-20 text-brand" />
+                  {pub.featured && (
+                    <div className="absolute top-3 right-3 px-3 py-1 bg-brand text-white rounded-full text-xs font-bold shadow-lg">
+                      FEATURED
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
@@ -287,10 +352,6 @@ function PublicationsListSection() {
                     <div className="flex items-center gap-1">
                       <Calendar size={14} />
                       <span>{pub.year}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <FileText size={14} />
-                      <span>{pub.pages}p</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Download size={14} />
