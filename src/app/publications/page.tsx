@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
+import Link from 'next/link';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 import { Button } from '@/components/ui';
@@ -81,6 +82,7 @@ function PublicationsListSection() {
   const publications = [
     {
       id: 1,
+      slug: 'agroforestry-impact-assessment-2023',
       title: 'Agroforestry Impact Assessment 2023',
       category: 'research',
       language: 'english',
@@ -92,6 +94,7 @@ function PublicationsListSection() {
     },
     {
       id: 2,
+      slug: 'annual-report-2022-23',
       title: 'Annual Report 2022-23',
       category: 'report',
       language: 'english',
@@ -103,6 +106,7 @@ function PublicationsListSection() {
     },
     {
       id: 3,
+      slug: 'women-empowerment-green-entrepreneurship',
       title: 'Women Empowerment Through Green Entrepreneurship',
       category: 'case-study',
       language: 'english',
@@ -114,6 +118,7 @@ function PublicationsListSection() {
     },
     {
       id: 4,
+      slug: 'miyawaki-forest-implementation-guide',
       title: 'Miyawaki Forest Implementation Guide',
       category: 'guide',
       language: 'gujarati',
@@ -125,6 +130,7 @@ function PublicationsListSection() {
     },
     {
       id: 5,
+      slug: 'climate-resilience-tribal-communities',
       title: 'Climate Resilience in Tribal Communities',
       category: 'research',
       language: 'english',
@@ -136,6 +142,7 @@ function PublicationsListSection() {
     },
     {
       id: 6,
+      slug: 'traditional-seed-conservation-manual',
       title: 'Traditional Seed Conservation Manual',
       category: 'guide',
       language: 'hindi',
@@ -251,8 +258,9 @@ function PublicationsListSection() {
           {filteredPublications.map((pub, index) => {
             const CategoryIcon = getCategoryIcon(pub.category);
             return (
-              <div
+              <Link
                 key={pub.id}
+                href={`/publications/${pub.slug}`}
                 className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-700 group flex flex-col ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
@@ -272,7 +280,7 @@ function PublicationsListSection() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-foreground mb-3">{pub.title}</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-brand transition-colors">{pub.title}</h3>
                   <p className="text-muted mb-4 line-clamp-3 flex-1">{pub.description}</p>
 
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted mb-4 bg-brand/5 px-3 py-2 rounded-lg">
@@ -290,17 +298,23 @@ function PublicationsListSection() {
                     </div>
                   </div>
 
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                    onClick={() => trackButtonClick(`download_publication_${pub.id}`)}
-                  >
-                    <Download size={16} className="mr-2" />
-                    Download PDF
-                  </Button>
+                  <div className="flex gap-2">
+                    <div className="flex-1 px-4 py-2 border-2 border-brand/20 text-brand rounded-lg group-hover:bg-brand group-hover:text-white transition-colors text-center font-semibold text-sm">
+                      View Details
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        trackButtonClick(`download_publication_${pub.id}`);
+                      }}
+                      className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand/90 transition-colors"
+                      aria-label="Download PDF"
+                    >
+                      <Download size={18} />
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
