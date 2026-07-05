@@ -1,4 +1,6 @@
 export { HeroSection } from './HeroSection';
+export { AfforestationBanner } from './AfforestationBanner';
+export { AfforestationDriveSection } from './AfforestationDriveSection';
 export { AboutSection } from './AboutSection';
 export { ProgramsSection } from './ProgramsSection';
 export { SDGSection } from './SDGSection';

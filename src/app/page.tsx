@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { HeroSection } from '@/components/home';
+import { HeroSection, AfforestationBanner } from '@/components/home';
 
+const AfforestationDriveSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.AfforestationDriveSection })));
 const AboutSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.AboutSection })));
 const SDGSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.SDGSection })));
 const ProgramsSection = dynamic(() => import('@/components/home').then(mod => ({ default: mod.ProgramsSection })));
@@ -113,8 +114,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
+      <AfforestationBanner />
+
       <main id="main-content" className="min-h-screen bg-background">
         <HeroSection />
+        <AfforestationDriveSection />
         <AboutSection />
         <SDGSection />
         <ProgramsSection />

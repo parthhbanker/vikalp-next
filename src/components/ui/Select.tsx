@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes, forwardRef } from 'react';
+import { SelectHTMLAttributes, forwardRef, useId } from 'react';
 import { type LucideIcon, ChevronDown } from 'lucide-react';
 import { trackFormInteraction } from '@/lib/analytics';
 
@@ -74,7 +74,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref
   ) => {
-    const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const selectId = id || `select-${generatedId}`;
     // Determine icon size based on input size if not explicitly set
     const getIconSize = () => {
       if (iconSize) return iconSize;
