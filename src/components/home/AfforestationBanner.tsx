@@ -1,14 +1,10 @@
 'use client';
 
-import { memo, useState } from 'react';
-import { Sprout, ArrowRight, X } from 'lucide-react';
+import { memo } from 'react';
+import { Sprout, ArrowRight } from 'lucide-react';
 import { trackButtonClick } from '@/lib/analytics';
 
 function AfforestationBannerComponent() {
-  const [isDismissed, setIsDismissed] = useState(false);
-
-  if (isDismissed) return null;
-
   return (
     <div className="relative bg-gradient-to-r from-brand-dark via-brand to-brand-dark text-white overflow-hidden">
       {/* Subtle moving dot pattern, consistent with other section backdrops */}
@@ -23,13 +19,13 @@ function AfforestationBannerComponent() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 py-2.5 sm:py-3 text-center pr-8 sm:pr-0">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 py-2.5 sm:py-3 text-center">
           <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/15 shrink-0">
             <Sprout size={15} strokeWidth={2.25} aria-hidden="true" />
           </span>
           <p className="text-sm sm:text-base font-medium leading-snug">
             <span className="font-bold">2026 Afforestation Drive</span> begins{' '}
-            <span className="font-bold">7th July</span> &mdash; help us plant 70,000 trees this season.
+            <span className="font-bold">7th July</span> &mdash; help us gift 70,000 trees this season.
           </p>
           <a
             href="#afforestation-drive"
@@ -41,18 +37,6 @@ function AfforestationBannerComponent() {
           </a>
         </div>
       </div>
-
-      <button
-        type="button"
-        onClick={() => {
-          trackButtonClick('afforestation_banner_dismiss');
-          setIsDismissed(true);
-        }}
-        aria-label="Dismiss announcement"
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-white/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
-      >
-        <X size={16} aria-hidden="true" />
-      </button>
     </div>
   );
 }

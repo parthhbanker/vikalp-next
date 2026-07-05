@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useMemo, useState } from 'react';
-import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle, Quote } from 'lucide-react';
 import { Button, Input } from '@/components/ui';
 import { trackButtonClick, trackDonation } from '@/lib/analytics';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -10,8 +10,11 @@ import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 const GOAL_TREES = 70000;
 const FUNDED_TREES = 38000;
 const GAP_TREES = GOAL_TREES - FUNDED_TREES;
+// On-the-ground progress against the funded 38,000 — update as planting proceeds after 7th July.
+const PLANTED_TREES = 0;
 const PRICE_PER_TREE = 300;
 const FUNDED_PERCENT = Math.round((FUNDED_TREES / GOAL_TREES) * 100);
+const PLANTED_PERCENT = Math.round((PLANTED_TREES / FUNDED_TREES) * 100);
 // Fallback for donors if the embedded checkout can't load (e.g. keys not configured yet)
 const DONATE_URL = 'https://pages.razorpay.com/pl_LXR167LW8A3lBt/view';
 const BRAND_HEX = '#619C03';
@@ -219,11 +222,11 @@ function DonationCalculator() {
         </div>
         <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Thank you!</h3>
         <p className="text-sm text-muted mb-6">
-          Your gift is funding {plantedCount.toLocaleString('en-IN')} tree{plantedCount === 1 ? '' : 's'} in this year&apos;s
-          Afforestation Drive. A receipt has been sent to your email.
+          Your gift is putting {plantedCount.toLocaleString('en-IN')} one-year-old tree{plantedCount === 1 ? '' : 's'} in the
+          hands of tribal farmers in Southern Gujarat this season. A receipt has been sent to your email.
         </p>
         <Button variant="outline" size="md" fullWidth onClick={() => setStatus('idle')}>
-          Plant More Trees
+          Gift More Trees
         </Button>
       </div>
     );
@@ -233,13 +236,13 @@ function DonationCalculator() {
     <div className="bg-gradient-to-br from-brand/8 via-white to-brand/5 rounded-2xl border-2 border-brand/15 shadow-lg p-6 sm:p-8">
       <div className="flex items-center gap-2 text-brand font-semibold text-sm mb-1">
         <Sprout size={18} strokeWidth={2.5} aria-hidden="true" />
-        Plant a Tree
+        Gift a Tree
       </div>
       <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-        ₹{PRICE_PER_TREE} plants one tree
+        ₹{PRICE_PER_TREE} gifts one tree to a farmer
       </h3>
       <p className="text-sm text-muted mb-6">
-        Choose how many trees you&apos;d like to fund towards the {GAP_TREES.toLocaleString('en-IN')} still waiting on a donor.
+        Choose how many one-year-old trees you&apos;d like to gift to tribal farmers in Southern Gujarat &mdash; {GAP_TREES.toLocaleString('en-IN')} are still waiting on a donor.
       </p>
 
       {/* Quick picks */}
@@ -286,7 +289,7 @@ function DonationCalculator() {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-xs text-muted mb-0.5">Trees planted</div>
+          <div className="text-xs text-muted mb-0.5">Trees gifted</div>
           <div className="text-2xl font-bold text-brand tabular-nums">
             {treeCount.toLocaleString('en-IN')}
           </div>
@@ -338,6 +341,43 @@ function DonationCalculator() {
   );
 }
 
+function StoryPanel({ isVisible }: { isVisible: boolean }) {
+  return (
+    <div
+      className={`relative max-w-4xl mx-auto mb-12 md:mb-16 bg-white rounded-2xl border border-border shadow-sm p-6 sm:p-8 md:p-10 overflow-hidden transition-all duration-700 delay-100 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+    >
+      <Quote className="absolute -top-2 -left-2 text-brand/5 w-28 h-28 sm:w-32 sm:h-32" aria-hidden="true" fill="currentColor" strokeWidth={0} />
+      <div className="relative">
+        <h3 className="text-sm font-bold text-brand uppercase tracking-wide mb-3">
+          Why a one-year-old tree?
+        </h3>
+        <div className="space-y-4 text-base sm:text-lg text-foreground leading-relaxed">
+          <p>
+            A tiny sapling handed to a family in the hills of South Gujarat rarely survives its first monsoon &mdash;
+            there&apos;s no fence, no water to spare, and no time to nurse it between wage-labour days. So for over
+            two decades, VIKALP has done that waiting ourselves: every tree spends its first year growing strong in
+            our own nurseries before it ever reaches a farmer&apos;s hands.
+          </p>
+          <p>
+            That head start changes everything downstream. A one-year-old tree establishes faster, shrugs off dry
+            spells, and starts giving back &mdash; shade, fodder, fruit, firewood, income &mdash; years sooner than a
+            seed ever could. It&apos;s the same principle behind our Bhoomi Producers&apos; Collective, where 5,000+
+            indigenous agroforest families across South Gujarat have seen household incomes rise by 30% by growing
+            trees on their own land.
+          </p>
+          <p className="font-semibold text-foreground">
+            This July, we want to hand over 70,000 more of these trees to tribal farming families. Our budget
+            covers 38,000. The other 32,000 are already growing in our nurseries &mdash; waiting on someone to
+            sponsor the family that will take them home.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AfforestationDriveSectionComponent() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.15 });
 
@@ -359,10 +399,13 @@ function AfforestationDriveSectionComponent() {
             <span className="text-brand">You&apos;re the gap.</span>
           </h2>
           <p className="text-lg text-muted leading-relaxed">
-            Our current budget covers {FUNDED_TREES.toLocaleString('en-IN')} saplings &mdash; that&apos;s {FUNDED_PERCENT}% of this
-            year&apos;s target. The remaining {GAP_TREES.toLocaleString('en-IN')} trees need sponsors before planting begins.
+            Our current budget covers {FUNDED_TREES.toLocaleString('en-IN')} one-year-old trees &mdash; that&apos;s {FUNDED_PERCENT}% of
+            this year&apos;s target. The remaining {GAP_TREES.toLocaleString('en-IN')} trees still need sponsors before we can hand
+            them to tribal farmers across Southern Gujarat.
           </p>
         </div>
+
+        <StoryPanel isVisible={isVisible} />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           {/* Left: progress + stats */}
@@ -373,6 +416,26 @@ function AfforestationDriveSectionComponent() {
           >
             <div className="bg-white rounded-2xl border border-border shadow-sm p-6 sm:p-8 mb-6">
               <TreeGrid isVisible={isVisible} />
+
+              <div className="mt-6 pt-6 border-t border-border">
+                <div className="flex items-center justify-between mb-2 text-sm">
+                  <span className="font-semibold text-foreground">Planted on the ground</span>
+                  <span className="text-muted tabular-nums">
+                    {PLANTED_TREES.toLocaleString('en-IN')} / {FUNDED_TREES.toLocaleString('en-IN')} funded trees
+                  </span>
+                </div>
+                <div className="h-2.5 bg-surface-secondary rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-brand rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: isVisible ? `${PLANTED_PERCENT}%` : '0%' }}
+                  />
+                </div>
+                <p className="text-xs text-muted mt-2">
+                  {PLANTED_TREES === 0
+                    ? 'Planting begins 7th July — this counter will track our progress live from there.'
+                    : `${PLANTED_PERCENT}% of this year's funded trees are already in the ground.`}
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
