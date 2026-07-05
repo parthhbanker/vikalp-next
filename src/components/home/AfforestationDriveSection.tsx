@@ -1,7 +1,8 @@
 'use client';
 
-import { memo, useMemo, useState } from 'react';
-import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle, Quote } from 'lucide-react';
+import { memo, useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle, Quote, Mail, X } from 'lucide-react';
 import { Button, Input } from '@/components/ui';
 import { trackButtonClick, trackDonation } from '@/lib/analytics';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -23,7 +24,10 @@ const QUICK_PICKS = [10, 50, 200];
 
 declare global {
   interface Window {
-    Razorpay: new (options: Record<string, unknown>) => { open: () => void };
+    Razorpay: new (options: Record<string, unknown>) => {
+      open: () => void;
+      on: (event: 'payment.failed', handler: (response: { error: { description?: string; reason?: string } }) => void) => void;
+    };
   }
 }
 
@@ -120,12 +124,91 @@ function TreeGrid({ isVisible }: { isVisible: boolean }) {
 
 type DonateStatus = 'idle' | 'loading' | 'success' | 'error';
 
+interface DonationReceipt {
+  trees: number;
+  amount: number;
+  paymentId: string;
+}
+
+function DonationSuccessModal({ receipt, onClose }: { receipt: DonationReceipt; onClose: () => void }) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="donation-success-title"
+        onClick={(e) => e.stopPropagation()}
+        className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 text-center animate-scale-in"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-4 top-4 p-1.5 rounded-full text-muted hover:bg-surface-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        >
+          <X size={18} aria-hidden="true" />
+        </button>
+
+        <div className="w-16 h-16 rounded-full bg-brand/15 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 size={32} className="text-brand" aria-hidden="true" />
+        </div>
+
+        <h3 id="donation-success-title" className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+          Thank you for your gift!
+        </h3>
+        <p className="text-sm text-muted mb-6 leading-relaxed">
+          You&apos;re putting {receipt.trees.toLocaleString('en-IN')} one-year-old tree{receipt.trees === 1 ? '' : 's'} in the
+          hands of tribal farmers in Southern Gujarat this season.
+        </p>
+
+        <div className="bg-surface-secondary rounded-xl p-4 mb-6 grid grid-cols-2 gap-4 text-left">
+          <div>
+            <div className="text-xs text-muted mb-0.5">Amount donated</div>
+            <div className="text-lg font-bold text-foreground tabular-nums">
+              ₹{receipt.amount.toLocaleString('en-IN')}
+            </div>
+          </div>
+          <div>
+            <div className="text-xs text-muted mb-0.5">Trees gifted</div>
+            <div className="text-lg font-bold text-brand tabular-nums">{receipt.trees.toLocaleString('en-IN')}</div>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-2 text-sm text-muted text-left bg-brand/5 border border-brand/15 rounded-lg p-3 mb-6">
+          <Mail size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
+          <span>
+            Your donation receipt will be emailed to you within <strong className="text-foreground">2 working days</strong>.
+          </span>
+        </div>
+
+        <Button variant="primary" size="lg" fullWidth onClick={onClose}>
+          Done
+        </Button>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 function DonationCalculator() {
   const [selected, setSelected] = useState<number>(QUICK_PICKS[1]);
   const [customValue, setCustomValue] = useState<string>('');
   const [status, setStatus] = useState<DonateStatus>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [plantedCount, setPlantedCount] = useState(0);
+  const [receipt, setReceipt] = useState<DonationReceipt | null>(null);
+  const [wasDeclined, setWasDeclined] = useState(false);
   const isCustom = customValue !== '';
 
   const treeCount = useMemo(() => {
@@ -148,6 +231,7 @@ function DonationCalculator() {
     if (treeCount <= 0 || status === 'loading') return;
     setStatus('loading');
     setErrorMessage('');
+    setWasDeclined(false);
     trackButtonClick('afforestation_donate_cta', { trees: treeCount, amount: total });
 
     try {
@@ -192,7 +276,11 @@ function DonationCalculator() {
               trees: treeCount,
               payment_id: paymentResponse.razorpay_payment_id,
             });
-            setPlantedCount(treeCount);
+            setReceipt({
+              trees: treeCount,
+              amount: order.amount / 100,
+              paymentId: paymentResponse.razorpay_payment_id,
+            });
             setStatus('success');
           } catch {
             setErrorMessage(
@@ -206,6 +294,15 @@ function DonationCalculator() {
         },
       });
 
+      razorpay.on('payment.failed', (response) => {
+        trackButtonClick('afforestation_donate_declined', {
+          trees: treeCount,
+          amount: total,
+          reason: response.error?.reason,
+        });
+        setWasDeclined(true);
+      });
+
       setStatus('idle');
       razorpay.open();
     } catch (err) {
@@ -214,26 +311,15 @@ function DonationCalculator() {
     }
   };
 
-  if (status === 'success') {
-    return (
-      <div className="bg-gradient-to-br from-brand/8 via-white to-brand/5 rounded-2xl border-2 border-brand/15 shadow-lg p-6 sm:p-8 text-center">
-        <div className="w-14 h-14 rounded-full bg-brand/15 flex items-center justify-center mx-auto mb-4">
-          <CheckCircle2 size={28} className="text-brand" aria-hidden="true" />
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Thank you!</h3>
-        <p className="text-sm text-muted mb-6">
-          Your gift is putting {plantedCount.toLocaleString('en-IN')} one-year-old tree{plantedCount === 1 ? '' : 's'} in the
-          hands of tribal farmers in Southern Gujarat this season. A receipt has been sent to your email.
-        </p>
-        <Button variant="outline" size="md" fullWidth onClick={() => setStatus('idle')}>
-          Gift More Trees
-        </Button>
-      </div>
-    );
-  }
+  const closeReceipt = () => {
+    setReceipt(null);
+    setStatus('idle');
+  };
 
   return (
     <div className="bg-gradient-to-br from-brand/8 via-white to-brand/5 rounded-2xl border-2 border-brand/15 shadow-lg p-6 sm:p-8">
+      {receipt && <DonationSuccessModal receipt={receipt} onClose={closeReceipt} />}
+
       <div className="flex items-center gap-2 text-brand font-semibold text-sm mb-1">
         <Sprout size={18} strokeWidth={2.5} aria-hidden="true" />
         Gift a Tree
@@ -331,7 +417,14 @@ function DonationCalculator() {
         </div>
       )}
 
-      {status !== 'error' && treeCount > 0 && (
+      {status === 'idle' && wasDeclined && (
+        <div className="flex items-start gap-2 text-sm text-warning mt-3 bg-warning/10 border border-warning/20 rounded-lg p-3">
+          <AlertCircle size={16} className="shrink-0 mt-0.5" aria-hidden="true" />
+          <span>Your last payment attempt didn&apos;t go through and no amount was deducted. Please try again.</span>
+        </div>
+      )}
+
+      {status !== 'error' && !wasDeclined && treeCount > 0 && (
         <p className="flex items-center gap-1.5 text-xs text-muted mt-3 justify-center text-center">
           <Sparkles size={13} className="text-brand shrink-0" aria-hidden="true" />
           That closes {gapCovered.toFixed(gapCovered < 1 ? 2 : 1)}% of this year&apos;s funding gap.
