@@ -2,8 +2,8 @@
 
 import { memo, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle, Quote, Mail, X } from 'lucide-react';
-import { Button, Input } from '@/components/ui';
+import { Sprout, Target, Wallet, TreeDeciduous, Sparkles, Loader2, CheckCircle2, AlertCircle, Quote, Mail, X, ShieldCheck } from 'lucide-react';
+import { Button, Input, TextArea } from '@/components/ui';
 import { trackButtonClick, trackDonation } from '@/lib/analytics';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
@@ -128,6 +128,7 @@ interface DonationReceipt {
   trees: number;
   amount: number;
   paymentId: string;
+  email: string;
 }
 
 function DonationSuccessModal({ receipt, onClose }: { receipt: DonationReceipt; onClose: () => void }) {
@@ -189,13 +190,175 @@ function DonationSuccessModal({ receipt, onClose }: { receipt: DonationReceipt; 
         <div className="flex items-start gap-2 text-sm text-muted text-left bg-brand/5 border border-brand/15 rounded-lg p-3 mb-6">
           <Mail size={16} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
           <span>
-            Your donation receipt will be emailed to you within <strong className="text-foreground">2 working days</strong>.
+            Your 80G donation receipt will be emailed to <strong className="text-foreground">{receipt.email}</strong> within{' '}
+            <strong className="text-foreground">2 working days</strong>.
           </span>
         </div>
 
         <Button variant="primary" size="lg" fullWidth onClick={onClose}>
           Done
         </Button>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+interface DonorDetails {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  pan: string;
+}
+
+const EMPTY_DONOR: DonorDetails = { name: '', email: '', phone: '', address: '', pan: '' };
+const PAN_REGEX = /^[A-Z]{5}[0-9]{4}[A-Z]$/i;
+
+function DonorDetailsModal({
+  treeCount,
+  total,
+  onCancel,
+  onConfirm,
+}: {
+  treeCount: number;
+  total: number;
+  onCancel: () => void;
+  onConfirm: (donor: DonorDetails) => void;
+}) {
+  const [donor, setDonor] = useState<DonorDetails>(EMPTY_DONOR);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancel();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onCancel]);
+
+  const handleChange = (field: keyof DonorDetails, value: string) => {
+    setDonor((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: '' }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Record<string, string> = {};
+
+    if (!donor.name.trim()) newErrors.name = 'Name is required for the receipt.';
+    if (!donor.email.trim()) {
+      newErrors.email = 'Email is required to send the receipt.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(donor.email)) {
+      newErrors.email = 'Please enter a valid email.';
+    }
+    if (!donor.phone.trim() || donor.phone.trim().length < 7) {
+      newErrors.phone = 'A valid phone number is required.';
+    }
+    if (!donor.address.trim()) newErrors.address = 'Address is required for the 80G receipt.';
+    if (donor.pan.trim() && !PAN_REGEX.test(donor.pan.trim())) {
+      newErrors.pan = 'That doesn’t look like a valid PAN (e.g. ABCDE1234F).';
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      onConfirm({ ...donor, pan: donor.pan.trim().toUpperCase() });
+    }
+  };
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={onCancel}
+      role="presentation"
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="donor-details-title"
+        onClick={(e) => e.stopPropagation()}
+        className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 my-8 animate-scale-in"
+      >
+        <button
+          type="button"
+          onClick={onCancel}
+          aria-label="Close"
+          className="absolute right-4 top-4 p-1.5 rounded-full text-muted hover:bg-surface-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        >
+          <X size={18} aria-hidden="true" />
+        </button>
+
+        <h3 id="donor-details-title" className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+          Your details for the receipt
+        </h3>
+        <p className="text-sm text-muted mb-6">
+          Gifting {treeCount.toLocaleString('en-IN')} tree{treeCount === 1 ? '' : 's'} &middot; ₹{total.toLocaleString('en-IN')}.
+          We need these details to issue your 80G tax receipt.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <Input
+            label="Full Name"
+            required
+            value={donor.name}
+            onChange={(e) => handleChange('name', e.target.value)}
+            error={errors.name}
+            fullWidth
+            trackingName="afforestation_donor_name"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input
+              label="Email"
+              type="email"
+              required
+              value={donor.email}
+              onChange={(e) => handleChange('email', e.target.value)}
+              error={errors.email}
+              fullWidth
+              trackingName="afforestation_donor_email"
+            />
+            <Input
+              label="Phone"
+              type="tel"
+              required
+              value={donor.phone}
+              onChange={(e) => handleChange('phone', e.target.value)}
+              error={errors.phone}
+              fullWidth
+              trackingName="afforestation_donor_phone"
+            />
+          </div>
+          <TextArea
+            label="Address"
+            required
+            rows={2}
+            placeholder="Flat/House no., Street, City, State, PIN code"
+            value={donor.address}
+            onChange={(e) => handleChange('address', e.target.value)}
+            error={errors.address}
+            fullWidth
+            trackingName="afforestation_donor_address"
+          />
+          <Input
+            label="PAN (optional — required to claim 80G tax deduction)"
+            value={donor.pan}
+            onChange={(e) => handleChange('pan', e.target.value.toUpperCase())}
+            error={errors.pan}
+            placeholder="ABCDE1234F"
+            maxLength={10}
+            fullWidth
+            trackingName="afforestation_donor_pan"
+          />
+
+          <p className="flex items-start gap-2 text-xs text-muted">
+            <ShieldCheck size={14} className="text-brand shrink-0 mt-0.5" aria-hidden="true" />
+            Used only to issue your donation receipt — never shared with anyone else.
+          </p>
+
+          <Button type="submit" variant="primary" size="lg" fullWidth>
+            Continue to Payment
+          </Button>
+        </form>
       </div>
     </div>,
     document.body
@@ -209,6 +372,7 @@ function DonationCalculator() {
   const [errorMessage, setErrorMessage] = useState('');
   const [receipt, setReceipt] = useState<DonationReceipt | null>(null);
   const [wasDeclined, setWasDeclined] = useState(false);
+  const [showDonorForm, setShowDonorForm] = useState(false);
   const isCustom = customValue !== '';
 
   const treeCount = useMemo(() => {
@@ -227,8 +391,13 @@ function DonationCalculator() {
     setCustomValue('');
   };
 
-  const handleDonate = async () => {
+  const handleDonateClick = () => {
     if (treeCount <= 0 || status === 'loading') return;
+    setShowDonorForm(true);
+  };
+
+  const proceedToPayment = async (donor: DonorDetails) => {
+    setShowDonorForm(false);
     setStatus('loading');
     setErrorMessage('');
     setWasDeclined(false);
@@ -239,7 +408,7 @@ function DonationCalculator() {
         fetch('/api/razorpay/order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trees: treeCount }),
+          body: JSON.stringify({ trees: treeCount, donor }),
         }),
         loadRazorpayScript(),
       ]);
@@ -255,6 +424,7 @@ function DonationCalculator() {
         name: 'VIKALP',
         description: `${treeCount.toLocaleString('en-IN')} Trees · Afforestation Drive 2026`,
         notes: { campaign: 'afforestation_drive_2026', trees: String(treeCount) },
+        prefill: { name: donor.name, email: donor.email, contact: donor.phone },
         theme: { color: BRAND_HEX },
         handler: async (paymentResponse: {
           razorpay_order_id: string;
@@ -280,6 +450,7 @@ function DonationCalculator() {
               trees: treeCount,
               amount: order.amount / 100,
               paymentId: paymentResponse.razorpay_payment_id,
+              email: donor.email,
             });
             setStatus('success');
           } catch {
@@ -319,6 +490,14 @@ function DonationCalculator() {
   return (
     <div className="bg-gradient-to-br from-brand/8 via-white to-brand/5 rounded-2xl border-2 border-brand/15 shadow-lg p-6 sm:p-8">
       {receipt && <DonationSuccessModal receipt={receipt} onClose={closeReceipt} />}
+      {showDonorForm && (
+        <DonorDetailsModal
+          treeCount={treeCount}
+          total={total}
+          onCancel={() => setShowDonorForm(false)}
+          onConfirm={proceedToPayment}
+        />
+      )}
 
       <div className="flex items-center gap-2 text-brand font-semibold text-sm mb-1">
         <Sprout size={18} strokeWidth={2.5} aria-hidden="true" />
@@ -386,7 +565,7 @@ function DonationCalculator() {
         variant="primary"
         size="lg"
         fullWidth
-        onClick={handleDonate}
+        onClick={handleDonateClick}
         disabled={treeCount <= 0 || status === 'loading'}
       >
         {status === 'loading' ? (
